@@ -1,8 +1,9 @@
-const express = require("express");
-const dotenv = require("dotenv").config();
-const cors = require("cors");
-const connectDB = require("./utils/db");
-const { errorHandler } = require("./middleware/errorHandler");
+import "dotenv/config";
+import cors from "cors";
+import express from "express";
+import connectDB from "./utils/db.js";
+import userRoutes from "./routes/user.routes.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 app.use(cors());
@@ -11,7 +12,7 @@ app.use(express.json());
 connectDB();
 
 app.get("/", (req, res) => res.send("Backend OK!!"));
-app.use("/api/users", require("./routes/user.routes"));
+app.use("/api/users", userRoutes);
 
 app.use(errorHandler);
 
