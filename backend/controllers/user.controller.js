@@ -2,12 +2,12 @@ import User from "../models/user.model.js";
 
 const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, userRole } = req.body;
 
     const hashPassword = await User.hashPassword(password);
 
-    const user = await User.create({ name, email, hashPassword });
-    const token = await user.generateAuthToken();
+    const user = await User.create({ name, email, hashPassword, userRole });
+    const token = await User.generateAuthToken();
 
     res.status(201).json({ message: "User create hogyaa!!", token, user });
   } catch (err) {
@@ -16,7 +16,8 @@ const registerUser = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
-  const users = await User.find();
+  const { email } = req.body;
+  const users = await User.findOne({ email }).select("+password");
   res.json(users);
 };
 
