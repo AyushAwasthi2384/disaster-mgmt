@@ -27,7 +27,7 @@ const LandingPage = () => {
           <ul className="flex items-center gap-6">
             <li>
               <Link
-                to="*"
+                to="/"
                 className="text-gray-300 hover:text-white transition duration-300"
               >
                 Home
@@ -80,6 +80,13 @@ const LandingPage = () => {
           <button className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition duration-300 flex items-center gap-2">
             <Bell className="w-4 h-4" />
             Alerts
+          </button>
+          <button className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition duration-300 flex items-center gap-2">
+            <Link
+            to="/login">
+            Login
+            </Link>
+
           </button>
         </div>
       </header>
