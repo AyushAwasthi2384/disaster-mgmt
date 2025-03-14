@@ -3,7 +3,7 @@ import process from "node:process";
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URL);
+    const conn = await mongoose.connect(`${process.env.MONGO_URL}/${process.env.MONGO_DB_NAME}`);
     console.log(`✅ MongoDB se Connect Hogyaa!!: ${conn.connection.host}`);
   } catch (err) {
     console.error(`❌ Error aa gya: ${err.message}`);
