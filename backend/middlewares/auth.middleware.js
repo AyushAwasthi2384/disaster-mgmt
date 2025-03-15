@@ -9,12 +9,14 @@ const authUser = async (req, res, next) => {
     (req.headers.authorization && req.headers.authorization.split(" ")[1]);
 
   if (!token) {
-    return res.status(401).json({ message: "Unauthorized Access" });
+    res.status(401).json({ message: "Unauthorized Access" });
+    return res.redirect("/login");
   }
 
   const isBlacklisted = await blacklistTokenModel.findOne({ token: token });
   if (isBlacklisted) {
     return res.status(401).json({ message: "Unauthorized Access" });
+    // return res.redirect("/login");
   }
 
   try {

@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+
     userRole: {
       type: String,
       enum: ["user", "admin"],
@@ -34,4 +35,3 @@ UserSchema.statics.hashPassword = async function (password) {
 };
 
 export default mongoose.model("User", UserSchema);
-// abhi ese hi h
