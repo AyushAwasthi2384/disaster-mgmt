@@ -4,6 +4,8 @@ import express from "express";
 import connectDB from "./utils/db.js";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/user.routes.js";
+import alertRoutes from "./routes/alert.routes.js";
+import activityRoutes from "./routes/activity.routes.js";
 import { errorHandler } from "./middlewares/errorHandler.js";
 
 const app = express();
@@ -16,6 +18,8 @@ connectDB();
 
 app.get("/", (req, res) => res.send("Backend OK!!"));
 app.use("/api/users", userRoutes);
+app.use("/api/alerts", alertRoutes);
+app.use("/api/activity", activityRoutes);
 
 app.use(errorHandler);
 
