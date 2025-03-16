@@ -56,7 +56,7 @@ const HazardReport = ({ title, description, date }) => {
   );
 };
 
-const BottomNav = () => {
+export const BottomNav = () => {
   const navItems = [
     { icon: <Users className="w-8 h-8 text-white my-2" />, label: "Community" },
     { icon: <HelpCircle className="w-8 h-8 text-white my-2" />, label: "Assistant" },
