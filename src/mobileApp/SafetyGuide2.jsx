@@ -7,16 +7,16 @@ import {
   Gift,
 } from "lucide-react";
 
-const SafetyGuide = () => {
+const SafetyGuide2 = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-white">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gray-800">
+     <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-800">
         <h1 className="text-lg font-semibold">logo</h1>
       </div>
 
       {/* Safety Guide Section */}
-      <div className="p-4 bg-gray-800">
+      <div className="p-4 bg-gray-900">
         <h2 className="flex items-center text-xl font-bold">
           <FileText className="mr-2 text-blue-400" size={24} />
           Safety Guide
@@ -58,26 +58,31 @@ const SafetyGuide = () => {
       <div className="fixed bottom-0 w-full bg-gray-800 p-2 flex justify-between items-center border-t border-gray-700">
         <div className="flex flex-col items-center">
           <Users className="text-white" size={20} />
-          <span className="text-xs">Community</span>
+          <span className="text-xs  pt-4">Community</span>
         </div>
         <div className="flex flex-col items-center">
-          <Megaphone className="text-white" size={20} />
-          <span className="text-xs">Assistant</span>
+          <Megaphone className="text-white" size={25} />
+          <span className="text-xs pt-3">Assistant</span>
         </div>
-        <button className="bg-red-500 text-white rounded-full p-4 shadow-lg">
-          <PhoneCall size={20} />
-        </button>
+
+        <div className="flex flex-col items-center">
+          <button className="bg-red-500 text-white rounded-full p-3 align-middle shadow-lg">
+            <PhoneCall size={15} />
+          </button>
+          <span className="text-xs">SOS</span>
+        </div>
+
         <div className="flex flex-col items-center">
           <FileText className="text-white" size={20} />
-          <span className="text-xs">Safety Guide</span>
+          <span className="text-xs  pt-4">Safety Guide</span>
         </div>
         <div className="flex flex-col items-center">
           <Gift className="text-white" size={20} />
-          <span className="text-xs">Donate</span>
+          <span className="text-xs  pt-4">Donate</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default SafetyGuide;
+export default SafetyGuide2;
