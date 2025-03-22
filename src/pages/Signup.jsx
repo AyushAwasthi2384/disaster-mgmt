@@ -1,5 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import gsap from "gsap";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/usercontext.jsx";
+import React, { useEffect, useRef, useState, useContext } from "react";
 import {
   Shield,
   Mail,
@@ -10,16 +13,15 @@ import {
   ArrowRight,
   UserPlus,
 } from "lucide-react";
-import gsap from "gsap";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
   const [newname, setNewName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const formRef = useRef(null);
   const titleRef = useRef(null);
@@ -28,7 +30,6 @@ const SignupPage = () => {
   const formElementsRef = useRef([]);
 
   useEffect(() => {
-    // Make sure all refs are properly initialized before animating
     if (
       !logoRef.current ||
       !titleRef.current ||
@@ -38,7 +39,6 @@ const SignupPage = () => {
       return;
     }
 
-    // Clear any existing animations
     gsap.killTweensOf([
       logoRef.current,
       titleRef.current,
@@ -46,7 +46,6 @@ const SignupPage = () => {
       formRef.current,
     ]);
 
-    // Create a new timeline with clear default properties
     const tl = gsap.timeline({
       defaults: {
         ease: "power3.out",
@@ -55,7 +54,6 @@ const SignupPage = () => {
       },
     });
 
-    // Simplified animation sequence
     tl.fromTo(
       logoRef.current,
       { y: -50, opacity: 0 },
@@ -74,7 +72,6 @@ const SignupPage = () => {
         "-=0.4"
       );
 
-    // Animate form elements one by one
     const formElements = formElementsRef.current;
     if (formElements.length > 0) {
       tl.fromTo(
@@ -84,7 +81,6 @@ const SignupPage = () => {
         "-=0.2"
       );
     } else {
-      // Fallback if form elements aren't captured
       tl.fromTo(
         formRef.current,
         { y: 30, opacity: 0 },
@@ -93,7 +89,6 @@ const SignupPage = () => {
       );
     }
 
-    // Background animation
     gsap.to(".bg-gradient", {
       backgroundPosition: "100% 100%",
       duration: 20,
@@ -102,7 +97,6 @@ const SignupPage = () => {
       ease: "sine.inOut",
     });
 
-    // Simple floating animation for decorative elements
     gsap.to(".decorative-blob", {
       y: -15,
       duration: 3,
@@ -112,28 +106,23 @@ const SignupPage = () => {
       stagger: 0.5,
     });
 
-    // Particle animation
     const particlesContainer = document.getElementById("particles");
     if (particlesContainer) {
-      // Clear existing particles first
       particlesContainer.innerHTML = "";
 
       for (let i = 0; i < 20; i++) {
         const particle = document.createElement("div");
         particle.className = "absolute rounded-full bg-blue-500/10";
 
-        // Random size
         const size = Math.random() * 20 + 5;
         particle.style.width = `${size}px`;
         particle.style.height = `${size}px`;
 
-        // Random position
         particle.style.left = `${Math.random() * 100}%`;
         particle.style.top = `${Math.random() * 100}%`;
 
         particlesContainer.appendChild(particle);
 
-        // Animate each particle
         gsap.to(particle, {
           x: `${(Math.random() - 0.5) * 100}`,
           y: `${(Math.random() - 0.5) * 100}`,
@@ -153,13 +142,45 @@ const SignupPage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserDataContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here
-    console.log("Signup submitted", { name, email, password });
+
+    const newUser = {
+      email: email,
+      password: password,
+      name: name,
+      userRole: newname,
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/users/register`,
+        newUser,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.status) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
+
+    // setEmail("");
+    // setPassword("");
   };
 
-  const passwordMatch = password === confirmPassword || confirmPassword === "";
+  // const passwordMatch = password === confirmPassword || confirmPassword === "";
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1A2233] to-[#252B39] select-none">
@@ -314,7 +335,7 @@ const SignupPage = () => {
             </p>
           </div>
 
-          <div className="space-y-2" ref={addToRefs}>
+          {/* <div className="space-y-2" ref={addToRefs}>
             <label
               htmlFor="confirmPassword"
               className="block text-sm font-medium text-gray-300"
@@ -353,7 +374,7 @@ const SignupPage = () => {
             {confirmPassword && !passwordMatch && (
               <p className="text-xs text-red-500">Passwords do not match</p>
             )}
-          </div>
+          </div> */}
 
           <div className="pt-2" ref={addToRefs}>
             <div className="flex items-center">

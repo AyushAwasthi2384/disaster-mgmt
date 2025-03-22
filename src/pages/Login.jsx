@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import { Shield, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 import gsap from "gsap";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/usercontext.jsx";
+import React, { useEffect, useRef, useState, useContext } from "react";
+import { Shield, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
   const formRef = useRef(null);
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
@@ -119,9 +122,40 @@ const LoginPage = () => {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const { setUser } = useContext(UserDataContext);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Login submitted", { email, password });
+
+    const userData = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/api/users/login`,
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(
+        "Error During SignIn:",
+        error.response ? error.response.data : error.message
+      );
+    }
   };
 
   return (

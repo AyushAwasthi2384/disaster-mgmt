@@ -12,9 +12,6 @@ import {
   UserPlus,
 } from "lucide-react";
 import gsap from "gsap";
-import Community from "./community";
-
-
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -158,7 +155,7 @@ const SignupPage = () => {
   };
   const Navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     Navigate("/Community"); 
   };
 

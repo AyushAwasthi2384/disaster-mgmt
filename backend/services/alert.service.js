@@ -37,6 +37,20 @@ const alertService = {
 
     return alert;
   },
+  
+  readAlert: async (id) => {
+    if (!id) {
+      throw new Error("ID is Required To Read An Alert");
+    }
+
+    const alert = await AlertSchema.findById(id);
+
+    if (!alert) {
+      throw new Error("Alert Not Found");
+    }
+
+    return alert;
+  },
 
   updateAlert: async (id, updateData) => {
     if (!id) {
@@ -55,20 +69,6 @@ const alertService = {
     return alert;
   },
 
-  readAlert: async (id) => {
-    if (!id) {
-      throw new Error("ID is Required To Read An Alert");
-    }
-
-    const alert = await AlertSchema.findById(id);
-
-    if (!alert) {
-      throw new Error("Alert Not Found");
-    }
-
-    return alert;
-  },
-
   deleteAlert: async (id) => {
     if (!id) {
       throw new Error("ID is Required To Delete An Alert");
@@ -80,7 +80,8 @@ const alertService = {
       throw new Error("Alert Not Found");
     }
 
-    await alert.deleteOne();
+    alert.isDeleted = true;
+    await alert.save();
 
     return alert;
   },

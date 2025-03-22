@@ -1,22 +1,14 @@
 import React from "react";
 import { BottomNav } from "./community";
-import {
-  ArrowLeft,
-  FileText,
-  Home,
-  Users,
-  Megaphone,
-  PhoneCall,
-  Gift,
-} from "lucide-react";
+import { ArrowLeft, FileText, Home, Gift } from "lucide-react";
 
 const Header = () => {
-    return (
-      <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-700">
-        <h1 className="text-lg font-semibold text-white">logo</h1>
-      </div>
-    );
-  };
+  return (
+    <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-700">
+      <h1 className="text-lg font-semibold text-white">logo</h1>
+    </div>
+  );
+};
 
 // GuideCard Component
 const GuideCard = ({ title, icon, items }) => {

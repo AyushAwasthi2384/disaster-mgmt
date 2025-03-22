@@ -1,5 +1,13 @@
 import React from "react";
-import { ArrowLeft, FileText, Ban, Users, Megaphone, PhoneCall, Gift } from "lucide-react";
+import {
+  ArrowLeft,
+  FileText,
+  Ban,
+  Users,
+  Megaphone,
+  PhoneCall,
+  Gift,
+} from "lucide-react";
 
 // Header Component
 const Header = () => {
