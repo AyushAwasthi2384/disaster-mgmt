@@ -21,12 +21,12 @@ function App() {
         <Route path="/Safety" element={<Safety />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/donation" element={<Donation />} /> 
+        <Route path="/donation" element={<Donation />} />
         <Route path="/community" element={<Community />} />
         <Route path="/assistant" element={<VoiceAssistant />} />
         <Route path="/safetyguide1" element={<SafetyGuide1 />} />
-        <Route path="/safetyguide2" element={<SafetyGuide2 />} /> 
-        <Route path="/safetyguide3" element={<SafetyGuide3 />} /> 
+        <Route path="/safetyguide2" element={<SafetyGuide2 />} />
+        <Route path="/safetyguide3" element={<SafetyGuide3 />} />
         <Route path="/dashboard" element={<DisasterDashboard />} />
       </Routes>
     </Router>
