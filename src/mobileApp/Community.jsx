@@ -1,4 +1,5 @@
 import React from "react";
+import MapComponent from "../component/MapComponent.jsx";
 import {
   AlertTriangle,
   Dot,
@@ -96,7 +97,7 @@ export const BottomNav = () => {
 
 const Community = () => {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex flex-col items-center">
+    <div className="bg-gray-900 text-white min-h-screen max-h-fit overflow-y-auto overflow-x-hidden mb-20 flex flex-col items-center">
       <div className="w-full bg-[#252B39] text-left text-lg font-bold p-2">
         <img src="https://placehold.co/50" alt="Logo" />
       </div>
@@ -112,8 +113,8 @@ const Community = () => {
 
       <div className="bg-[#252B39] p-3 rounded-lg my-2 flex-col w-full">
         <h1 className="mb-2 text-center">Community Hazard Reports</h1>
-        <div className="w-full h-[35vw] bg-gray-500 rounded-xl text-center">
-          Map here
+        <div className="w-full h-[60vw] bg-gray-500 rounded-xl text-center">
+          <MapComponent />
         </div>
 
         <HazardReport

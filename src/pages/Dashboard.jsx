@@ -1,4 +1,5 @@
 import React from "react";
+import MapComponent from "../component/MapComponent.jsx";
 import { Search, ChevronRight, AlertTriangle } from "lucide-react";
 
 const DisasterDashboard = () => {
@@ -22,11 +23,13 @@ const DisasterDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 flex flex-col w-screen h-screen overflow-auto scrollbar-hide shadow-md">
         <div className="p-4 flex-1">
-          <img
+          {/* <img
             src="https://placehold.co/800x400"
             alt="Map of Lucknow"
-            className="w-full h-[60vh] object-cover rounded-xl hover:scale-101"
-          />
+            /> */}
+          <div className="w-full h-[50vh] object-cover rounded-xl hover:scale-101">
+            <MapComponent />
+          </div>
         </div>
 
         {/* Weather Widget */}
