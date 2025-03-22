@@ -15,7 +15,14 @@ const Assistant = () => {
   const [language, setLanguage] = useState("English");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const languages = ["English", "Hindi", "Bengali", "Tamil", "Telugu", "Marathi"];
+  const languages = [
+    "English",
+    "Hindi",
+    "Bengali",
+    "Tamil",
+    "Telugu",
+    "Marathi",
+  ];
 
   const handleSend = () => {
     if (input.trim() !== "") {
@@ -59,7 +66,9 @@ const Assistant = () => {
                         setShowDropdown(false);
                       }}
                       className={`px-4 py-2 text-sm cursor-pointer hover:bg-[#2c3344] ${
-                        lang === language ? "bg-[#2c3344] text-blue-400" : "text-gray-300"
+                        lang === language
+                          ? "bg-[#2c3344] text-blue-400"
+                          : "text-gray-300"
                       }`}
                     >
                       {lang}

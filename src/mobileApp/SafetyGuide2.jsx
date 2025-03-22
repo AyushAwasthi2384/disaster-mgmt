@@ -11,7 +11,7 @@ const SafetyGuide2 = () => {
   return (
     <div className="bg-gray-900 min-h-screen text-white">
       {/* Header */}
-     <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-800">
+      <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-800">
         <h1 className="text-lg font-semibold">logo</h1>
       </div>
 

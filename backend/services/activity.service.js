@@ -10,7 +10,7 @@ const activityService = {
     duration,
   }) => {
     if (!alert || !title || !description || !type || !leadBy || !duration) {
-      throw new Error("All Fields Are Required To Enter By Body");
+      throw new Error("All Fields Are Required To Enter By Body.");
     }
 
     const activity = await ActivitySchema.create({
@@ -68,7 +68,8 @@ const activityService = {
       throw new Error("Activity Not Found");
     }
 
-    await activity.deleteOne();
+    activity.isDeleted = true;
+    await activity.save();
 
     return activity;
   },
