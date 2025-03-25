@@ -136,7 +136,7 @@ const LoginPage = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/users/login`,
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/users/login`,
         userData,
         {
           headers: {

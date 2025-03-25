@@ -157,7 +157,7 @@ const SignupPage = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/users/register`,
+        `${import.meta.env.VITE_BACKEND_BASE_URL}/api/users/register`,
         newUser,
         {
           headers: {

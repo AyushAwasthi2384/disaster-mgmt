@@ -228,7 +228,7 @@ const DisasterDashboard = () => {
       </div>
 
       <div className="w-100 overflow-auto">
-        <div className="col-span-4 flex flex-col space-y-2 mb-4 h-[40vh] overflow-auto scrollbar-hide shadow-md">
+        {/* <div className="col-span-4 flex flex-col space-y-2 mb-4 h-[40vh] overflow-auto scrollbar-hide shadow-md">
           <div className="bg-[#161E29] rounded-xl p-4">
             {[
               { area: "Jankipuram, Lucknow", color: "bg-red-500" },
@@ -255,8 +255,8 @@ const DisasterDashboard = () => {
               </div>
             ))}
           </div>
-        </div>
-        <div className="space-y-4 h-[60vh] overflow-auto scrollbar-hide shadow-md">
+        </div> */}
+        <div className="space-y-4 p-3 overflow-auto scrollbar-hide shadow-md">
           <div className="rounded-lg overflow-hidden">
             <div className="bg-[#161E29] rounded-xl p-4">
               <img
