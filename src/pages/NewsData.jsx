@@ -12,7 +12,7 @@ const NewsData = () => {
         if (!apiKey) {
           console.error(
             "API key is missing. Please set it in your environment variables."
-          );
+          );  
           setError("API key is missing.");
           return;
         }

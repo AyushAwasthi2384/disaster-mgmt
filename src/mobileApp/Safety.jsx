@@ -6,6 +6,7 @@ import {
   Megaphone,
   Gift,
 } from "lucide-react";
+import { BottomNav } from "./Community";
 
 const SafetyGuide = () => {
   return (
@@ -21,8 +22,8 @@ const SafetyGuide = () => {
           <FileText className="mr-2 text-blue-400" size={24} />
           Safety Guide
         </h2>
-        <button className="flex items-center text-blue-400 mt-2">
-          <ArrowLeft className="mr-1" size={18} />
+        <button className="flex items-center text-blue-400 mt-2 cursor-pointer">
+          <ArrowLeft className="mr-1 cursor-pointer" size={18} />
           Back to guides
         </button>
       </div>
@@ -54,28 +55,7 @@ const SafetyGuide = () => {
         </ul>
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 w-full bg-gray-800 p-2 flex justify-between items-center border-t border-gray-700">
-        <div className="flex flex-col items-center">
-          <Users className="text-white" size={20} />
-          <span className="text-xs">Community</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <Megaphone className="text-white" size={20} />
-          <span className="text-xs">Assistant</span>
-        </div>
-        <button className="bg-red-500 text-white rounded-full p-4 shadow-lg">
-          <PhoneCall size={20} />
-        </button>
-        <div className="flex flex-col items-center">
-          <FileText className="text-white" size={20} />
-          <span className="text-xs">Safety Guide</span>
-        </div>
-        <div className="flex flex-col items-center">
-          <Gift className="text-white" size={20} />
-          <span className="text-xs">Donate</span>
-        </div>
-      </div>
+     <BottomNav />
     </div>
   );
 };

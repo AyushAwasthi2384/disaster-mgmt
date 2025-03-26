@@ -59,28 +59,28 @@ const HazardReport = ({ title, description, date }) => {
 
 export const BottomNav = () => {
   const navItems = [
-    { icon: <Users className="w-8 h-8 text-white my-2" />, label: "Community" },
+    { icon: <Users className="w-8 h-8 text-white my-2 cursor-pointer" />, label: "Community" },
     {
-      icon: <HelpCircle className="w-8 h-8 text-white my-2" />,
+      icon: <HelpCircle className="w-8 h-8 text-white my-2 cursor-pointer" />,
       label: "Assistant",
     },
     {
-      icon: <PhoneCall className="w-8 h-8 text-white" />,
+      icon: <PhoneCall className="w-8 h-8 text-white cursor-pointer" />,
       label: "SOS",
       isSOS: true,
     },
     {
-      icon: <BookOpen className="w-8 h-8 text-white my-2" />,
+      icon: <BookOpen className="w-8 h-8 text-white my-2 cursor-pointer" />,
       label: "Safety Guide",
     },
     {
-      icon: <HandCoins className="w-8 h-8 text-white my-2" />,
+      icon: <HandCoins className="w-8 h-8 text-white my-2 cursor-pointer" />,
       label: "Donate",
     },
   ];
 
   return (
-    <div className="fixed bottom-0 w-full bg-gray-800 px-2 py-2 flex justify-between shadow-md">
+    <div className="fixed bottom-0 w-full bg-gray-800 px-2 py-2 flex justify-between shadow-md overflow-x-hidden overflow-y-auto">
       {navItems.map((item, index) => (
         <div key={index} className="flex flex-col items-center cursor-pointer">
           {item.isSOS ? (

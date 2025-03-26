@@ -3,7 +3,7 @@ import SignupPage from "./pages/Signup";
 import Safety from "./mobileApp/Safety";
 import NotFoundPage from "./pages/NotFound";
 import Donation from "./mobileApp/Donation";
-import Community from "./mobileApp/community";
+import Community from "./mobileApp/Community";
 import LandingPage from "./pages/LandingPage";
 import DisasterDashboard from "./pages/Dashboard";
 import SafetyGuide1 from "./mobileApp/SafetyGuide1";
@@ -11,7 +11,7 @@ import SafetyGuide2 from "./mobileApp/SafetyGuide2";
 import SafetyGuide3 from "./mobileApp/SafetyGuide3";
 import VoiceAssistant from "./mobileApp/Assistant";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+ 
 function App() {
   return (
     <Router>

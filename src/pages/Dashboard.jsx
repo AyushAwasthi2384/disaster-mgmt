@@ -6,7 +6,6 @@ import { Search, AlertTriangle } from "lucide-react";
 
 const DisasterDashboard = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
-
   const [qty, setQty] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -17,7 +16,6 @@ const DisasterDashboard = () => {
     const formData = { resourceType, qty, name, description };
     console.log("Form Submitted:", formData);
     setIsPopupVisible(false);
-
     setResourceType("");
     setQty("");
     setName("");
@@ -78,14 +76,14 @@ const DisasterDashboard = () => {
                   className="w-full px-3 py-2 bg-[#161E29] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows="3"
                   required
-                />
+                /> 
               </div>
-              <div className="flex justify-end gap-4">
+              <div className="flex justify-end gap-4"> 
                 <button
                   type="button"
                   onClick={() => setIsPopupVisible(false)}
                   className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
-                >
+                > 
                   Cancel
                 </button>
                 <button
@@ -217,7 +215,7 @@ const DisasterDashboard = () => {
                             onClick={handleResource}
                             className="px-3 py-1 bg-blue-600 rounded-lg text-sm"
                           >
-                            Resource
+                            Resource 
                           </button>
                         </div>
                       </div>

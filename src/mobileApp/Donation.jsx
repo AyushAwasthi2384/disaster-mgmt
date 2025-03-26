@@ -1,5 +1,5 @@
 import { MapPin, Users, Mic, PhoneCall, BookOpen, Heart } from "lucide-react";
-import { BottomNav } from "./community";
+import { BottomNav } from "./Community";
 
 const Donation = () => {
   return (

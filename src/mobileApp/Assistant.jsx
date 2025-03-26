@@ -2,12 +2,8 @@ import { useState } from "react";
 import {
   Globe,
   Send,
-  Mic,
-  Users,
-  BookOpen,
-  PhoneCall,
-  Heart,
 } from "lucide-react";
+import { BottomNav } from "./Community";
 
 const Assistant = () => {
   const [input, setInput] = useState("");
@@ -35,7 +31,7 @@ const Assistant = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1e29] text-white flex flex-col">
+    <div className="min-h-screen bg-[#1a1e29] text-white flex flex-col overflow-x-hidden overflow-y-auto">
       {/* Header */}
       <div className="bg-[#2c3344] p-4 text-lg font-bold">logo</div>
 
@@ -112,29 +108,8 @@ const Assistant = () => {
         </button>
       </div>
 
-      {/* Bottom Navbar */}
-      <div className="bg-[#2c3344] p-4 flex justify-between text-sm text-gray-300">
-        <div className="flex flex-col items-center cursor-pointer">
-          <Users size={18} />
-          <span>Community</span>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer">
-          <Mic size={18} />
-          <span>Assistant</span>
-        </div>
-        <div className="flex flex-col items-center text-red-500 cursor-pointer">
-          <PhoneCall size={18} />
-          <span>SOS</span>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer">
-          <BookOpen size={18} />
-          <span>Safety Guide</span>
-        </div>
-        <div className="flex flex-col items-center cursor-pointer">
-          <Heart size={18} />
-          <span>Donate</span>
-        </div>
-      </div>
+      <BottomNav/>
+
     </div>
   );
 };
