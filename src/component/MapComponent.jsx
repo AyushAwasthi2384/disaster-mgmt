@@ -5,7 +5,6 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import "leaflet.markercluster/dist/leaflet.markercluster.js";
 
-// Define disaster severity colors
 const SEVERITY_COLORS = {
   low: "#4caf50", // Green
   medium: "#ff9800", // Orange
@@ -24,12 +23,14 @@ const MapComponent = ({
   const mapInstanceRef = useRef(null);
   const markersLayerRef = useRef(null);
   const userMarkersLayerRef = useRef(null);
+
   const [userMarkers, setUserMarkers] = useState([]);
   const [mapControls, setMapControls] = useState({
     satellite: false,
     measurement: false,
   });
-  const [activeControl, setActiveControl] = useState(null); // Track active button (satellite or measurement)
+
+  const [activeControl, setActiveControl] = useState(null);
 
   const [initialLat, initialLng] = mapCenter.split(",").map(parseFloat);
 
