@@ -1,11 +1,16 @@
 import { MapPin, Users, Mic, PhoneCall, BookOpen, Heart } from "lucide-react";
 import { BottomNav } from "./Community";
+import { useNavigate } from "react-router-dom";
 
 const Donation = () => {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+      navigate("/api/users/logout");
+    };
   return (
     <div className="min-h-screen bg-[#1a1e29] text-white flex flex-col">
       {/* Header */}
-      <div className="bg-[#2c3344] p-4 text-lg font-bold">logo</div>
+      <div className="bg-[#2c3344] p-4 text-lg cursor-pointer font-bold" onClick={handleLogout}>Logout</div>
 
       {/* Main Content */}
       <div className="flex-1 p-4">
@@ -21,7 +26,7 @@ const Donation = () => {
 
           {/* Image Section */}
           <img
-            src="https://via.placeholder.com/300x150?text=Flood+Relief+Image"
+            src="https://placehold.co/300x150"
             alt="Flood Relief"
             className="w-full h-32 object-cover rounded-lg mb-3"
           />

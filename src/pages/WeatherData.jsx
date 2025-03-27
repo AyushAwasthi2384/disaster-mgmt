@@ -1,10 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
-// https://meet.google.com/qhk-nfje-sje
-// https://us.123rf.com/450wm/captainvector/captainvector2204/captainvector220468917/185265890-rain-fall-icon.jpg?ver=6
-// https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcREIJPATLP8yRxohI3EAVmiEeB-MYiKjIToiHfFFsoVXl_xm2dB
-//https://img.freepik.com/premium-psd/yellow-ball-black-background-with-black-background_1142283-430928.jpg?w=360
 
+// https://img.freepik.com/premium-psd/yellow-ball-black-background-with-black-background_1142283-430928.jpg?w=100
 
 const WeatherReport = () => {
   const [weatherData, setWeatherData] = useState(null);
@@ -13,6 +10,7 @@ const WeatherReport = () => {
   const [location] = useState("Lucknow");
 
   const WEATHERSTACK_API_KEY = import.meta.env.VITE_WEATHERSTACK_API_KEY;
+  // const OPENWEATHER_API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
   const fetchWeatherData = useCallback(async () => {
     setLoading(true);
@@ -27,16 +25,31 @@ const WeatherReport = () => {
       return;
     }
 
+    // if (!OPENWEATHER_API_KEY) {
+    //   console.error(
+    //     "API key is missing. Please set it in your environment variables."
+    //   );
+    //   setError("API key is missing.");
+    //   setLoading(false);
+    //   return;
+    // }
+
+    // const response2 = await fetch(
+    //   "https://api.openweathermap.org/data/3.0/onecall?lat={21.5937}&lon={78.9629}&appid=${OPENWEATHER_API_KEY}"
+    // );
+    // const data2 = await response2.json();
+    // console.log(data2);
+
     try {
-      const response = await fetch(
+      const response1 = await fetch(
         `https://api.weatherstack.com/current?access_key=${WEATHERSTACK_API_KEY}&query=${location}&units=m`
       );
 
-      if (!response.ok) {
+      if (!response1.ok) {
         throw new Error("Failed to fetch weather data");
       }
 
-      const data = await response.json();
+      const data = await response1.json();
 
       if (data.error) {
         throw new Error(data.error.info);
@@ -111,7 +124,7 @@ const WeatherReport = () => {
       const tempVariation = Math.round(Math.sin(i) * 4);
       return {
         day,
-        icon: 
+        icon:
           weatherData?.current?.weather_icons?.[0] ||
           "https://placehold.co/100x100",
         high: `${Math.round(currentTemp + 2 - tempVariation)}°c`,
@@ -178,13 +191,13 @@ const WeatherReport = () => {
             <img
               src={
                 weatherData.current.weather_icons?.[0] ||
-                "https://placehold.co/100x100"
+                "https://img.freepik.com/premium-psd/yellow-ball-black-background-with-black-background_1142283-430928.jpg?w=100"
               }
               alt={
                 weatherData.current.weather_descriptions?.[0] || "Weather Icon"
               }
               className="w-20 h-20"
-            /> 
+            />
             <p className="text-sm text-gray-400 mt-1">
               {weatherData.current.weather_descriptions?.[0]}
             </p>
@@ -195,7 +208,7 @@ const WeatherReport = () => {
           {hourlyForecast.map((forecast, index) => (
             <div key={index} className="flex flex-col items-center">
               <img
-                src={forecast.icon}
+                src={forecast.icon || "https://img.freepik.com/premium-psd/yellow-ball-black-background-with-black-background_1142283-430928.jpg?w=100"}
                 alt="Weather icon"
                 className="w-8 h-8 mb-1"
               />
@@ -242,7 +255,7 @@ const WeatherReport = () => {
           {weeklyForecast.map((day, index) => (
             <div key={index} className="flex flex-col items-center">
               <p className="text-sm mb-1">{day.day}</p>
-              <img src={day.icon} alt="Weather icon" className="w-8 h-8 mb-1" />
+              <img src={day.icon || "https://img.freepik.com/premium-psd/yellow-ball-black-background-with-black-background_1142283-430928.jpg?w=100"} alt="Weather icon" className="w-8 h-8 mb-1" />
               <p className="text-sm font-bold">{day.high}</p>
               <p className="text-xs text-gray-400">{day.low}</p>
             </div>

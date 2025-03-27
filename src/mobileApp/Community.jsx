@@ -1,5 +1,6 @@
 import React from "react";
 import MapComponent from "../component/MapComponent.jsx";
+import { useNavigate } from "react-router-dom";
 import {
   AlertTriangle,
   Dot,
@@ -59,7 +60,10 @@ const HazardReport = ({ title, description, date }) => {
 
 export const BottomNav = () => {
   const navItems = [
-    { icon: <Users className="w-8 h-8 text-white my-2 cursor-pointer" />, label: "Community" },
+    {
+      icon: <Users className="w-8 h-8 text-white my-2 cursor-pointer" />,
+      label: "Community",
+    },
     {
       icon: <HelpCircle className="w-8 h-8 text-white my-2 cursor-pointer" />,
       label: "Assistant",
@@ -96,10 +100,20 @@ export const BottomNav = () => {
 };
 
 const Community = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/api/users/logout");
+  };
+
   return (
     <div className="bg-gray-900 text-white min-h-screen max-h-fit overflow-y-auto overflow-x-hidden mb-20 flex flex-col items-center">
       <div className="w-full bg-[#252B39] text-left text-lg font-bold p-2">
-        <img src="https://placehold.co/50" alt="Logo" />
+        <div
+          className="bg-[#2c3344] p-4 text-lg cursor-pointer font-bold"
+          onClick={handleLogout}
+        >
+          Logout
+        </div>
       </div>
 
       <div className="w-full text-left text-lg font-bold p-2">

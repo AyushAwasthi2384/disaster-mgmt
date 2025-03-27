@@ -7,8 +7,6 @@ import {
   Shield,
   Users,
   MapPin,
-  Menu,
-  X,
   ExternalLink,
 } from "lucide-react";
 
@@ -82,11 +80,7 @@ const LandingPage = () => {
             Alerts
           </button>
           <button className="cursor-pointer bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition duration-300 flex items-center gap-2">
-            <Link
-            to="/login">
-            Login
-            </Link>
-
+            <Link to="/login">Login</Link>
           </button>
         </div>
       </header>

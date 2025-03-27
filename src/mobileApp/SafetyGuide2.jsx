@@ -6,13 +6,23 @@ import {
   Megaphone,
   Gift,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SafetyGuide2 = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/api/users/logout");
+  };
   return (
     <div className="bg-gray-900 min-h-screen text-white">
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-800">
-        <h1 className="text-lg font-semibold">logo</h1>
+        <button
+          className="bg-[#2c3344] p-4 text-lg cursor-pointer font-bold"
+          onClick={handleLogout}
+        >
+          Logout
+        </button>{" "}
       </div>
 
       {/* Safety Guide Section */}

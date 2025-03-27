@@ -4,6 +4,7 @@ import {
   Send,
 } from "lucide-react";
 import { BottomNav } from "./Community";
+import { useNavigate } from "react-router-dom";
 
 const Assistant = () => {
   const [input, setInput] = useState("");
@@ -30,10 +31,17 @@ const Assistant = () => {
     }
   };
 
+    const navigate = useNavigate();
+    const handleLogout = () => {
+      navigate("/api/users/logout");
+    };
+  
+
   return (
     <div className="min-h-screen bg-[#1a1e29] text-white flex flex-col overflow-x-hidden overflow-y-auto">
       {/* Header */}
-      <div className="bg-[#2c3344] p-4 text-lg font-bold">logo</div>
+      <div className="bg-[#2c3344] p-4 text-lg cursor-pointer font-bold" onClick={handleLogout}>Logout</div>
+      
 
       {/* Main Content */}
       <div className="flex-1 p-4">

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import MapComponent from "../component/MapComponent.jsx";
-import WeatherData from "./WeatherData.jsx";
 import NewsData from "./NewsData.jsx";
+import React, { useState } from "react";
+import WeatherData from "./WeatherData.jsx";
+import { useNavigate } from "react-router-dom";
 import { Search, AlertTriangle } from "lucide-react";
+import MapComponent from "../component/MapComponent.jsx";
 
 const DisasterDashboard = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -24,6 +25,11 @@ const DisasterDashboard = () => {
 
   const handleResource = () => {
     setIsPopupVisible(true);
+  };
+
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/api/users/logout");
   };
 
   return (
@@ -76,14 +82,14 @@ const DisasterDashboard = () => {
                   className="w-full px-3 py-2 bg-[#161E29] text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   rows="3"
                   required
-                /> 
+                />
               </div>
-              <div className="flex justify-end gap-4"> 
+              <div className="flex justify-end gap-4">
                 <button
                   type="button"
                   onClick={() => setIsPopupVisible(false)}
                   className="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition"
-                > 
+                >
                   Cancel
                 </button>
                 <button
@@ -111,6 +117,12 @@ const DisasterDashboard = () => {
           <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center"></div>
           <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center"></div>
           <div className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center"></div>
+          <button
+            className="mt-52 cursor-pointer bg-blue-600 text-white px-3 py-1 text-center rounded-xl"
+            onClick={handleLogout}
+          >
+            LogOut
+          </button>
         </div>
       </div>
 
@@ -215,7 +227,7 @@ const DisasterDashboard = () => {
                             onClick={handleResource}
                             className="px-3 py-1 bg-blue-600 rounded-lg text-sm"
                           >
-                            Resource 
+                            Resource
                           </button>
                         </div>
                       </div>
@@ -230,7 +242,7 @@ const DisasterDashboard = () => {
 
       <div className="w-100 overflow-auto">
         <div className="space-y-4 p-3 overflow-auto scrollbar-hide shadow-md">
-        <NewsData />
+          <NewsData />
         </div>
       </div>
     </div>

@@ -1,11 +1,21 @@
 import React from "react";
-import { BottomNav } from "./community";
+import { BottomNav } from "./Community.jsx";
 import { ArrowLeft, FileText, Home, Gift } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate("/api/users/logout");
+  };
   return (
     <div className="flex items-center justify-between px-4 py-3 bg-gray-900 border-b-2 border-gray-700">
-      <h1 className="text-lg font-semibold text-white">logo</h1>
+      <button
+        className="bg-[#2c3344] p-4 text-lg cursor-pointer font-bold"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>{" "}
     </div>
   );
 };
