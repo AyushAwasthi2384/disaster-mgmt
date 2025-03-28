@@ -39,8 +39,8 @@ const MapComponent = ({
   disasters = [], // Array of disaster data
   onMarkerClick = () => {}, // Callback for marker click
   allowUserMarkers = true, // Allow user to add markers
-  mapCenter = "21.5937,78.9629", // Default map center (India)
-  initialZoom = 4, // Default zoom level
+  mapCenter = "28.5937,78.9629", // Default map center (India)
+  initialZoom = 5, // Default zoom level
 }) => {
   // Refs for managing map and layers
   const mapRef = useRef(null);
@@ -132,8 +132,8 @@ const MapComponent = ({
   useEffect(() => {
     if (!mapInstanceRef.current || !markersLayerRef.current) return;
 
-    // Clear existing markers
-    markersLayerRef.current.clearLayers();
+    // // Clear existing markers
+    // markersLayerRef.current.clearLayers();
 
     // Filter valid disasters with coordinates
     const validDisasters = disasters.filter(
@@ -142,16 +142,17 @@ const MapComponent = ({
         !isNaN(disaster.location.coordinates[0]) &&
         !isNaN(disaster.location.coordinates[1])
     );
+    console.log("Valid Disasters:", disasters);
 
     // Prepare heatmap data
     const heatmapData = validDisasters.map((disaster) => {
-      const [lng, lat] = disaster.location.coordinates;
-      return [lat, lng, 1]; // [latitude, longitude, intensity]
+      const {lng, lat} = disaster.location.coordinates;
+      return [lat, lng, 3]; // [latitude, longitude, intensity]
     });
 
     // Add markers for each disaster
-    validDisasters.forEach((disaster) => {
-      const [lng, lat] = disaster.location.coordinates;
+    disasters.forEach((disaster) => {
+      const {lng, lat} = disaster.location.coordinates;
       const severityLevel = (disaster.severity || "medium").toLowerCase();
       const markerColor =
         MAP_CONFIG.SEVERITY_COLORS[severityLevel] ||
@@ -167,7 +168,7 @@ const MapComponent = ({
       const marker = L.marker([lat, lng], { icon: customIcon }).bindPopup(`
         <div style="min-width:250px;">
           <h3 style="margin:0 0 8px 0; color:${markerColor};">${
-        disaster.name || "Unnamed Disaster"
+        disaster.title || "Unnamed Disaster"
       }</h3>
           <div><b>Severity:</b> ${disaster.severity || "Unknown"}</div>
           <div><b>Date:</b> ${new Date(
@@ -184,26 +185,35 @@ const MapComponent = ({
     });
 
     // Manage heatmap layer
-    if (heatmapLayerRef.current) {
-      mapInstanceRef.current.removeLayer(heatmapLayerRef.current);
-      heatmapLayerRef.current = null;
-    }
+    // if (heatmapLayerRef.current) {
+    //   // mapInstanceRef.current.removeLayer(heatmapLayerRef.current);
+    //   heatmapLayerRef.current = null;
+    // }
 
     if (heatmapData.length > 0) {
       heatmapLayerRef.current = L.heatLayer(heatmapData, {
-        radius: 25,
-        blur: 15,
-        maxZoom: 17,
+        radius: 35,         // Increased radius for wider coverage
+        blur: 20,          // Increased blur for smoother transitions
+        maxZoom: 20,       // Higher maxZoom to show heatmap at all zoom levels
+        max: 1.0,          // Maximum point intensity
+        minOpacity: 0.3,   // Minimum opacity for better visibility
+        gradient: {        // Custom color gradient
+          0.0: '#87CEEB',  // Light blue
+          0.3: '#FFD700',  // Yellow
+          0.6: '#FFA500',  // Orange
+          0.8: '#FF4500',  // Red-Orange
+          1.0: '#FF0000'   // Red
+        }
       }).addTo(mapInstanceRef.current);
     }
 
     // Cleanup heatmap layer on unmount
-    return () => {
-      if (heatmapLayerRef.current) {
-        mapInstanceRef.current.removeLayer(heatmapLayerRef.current);
-        heatmapLayerRef.current = null;
-      }
-    };
+    // return () => {
+    //   if (heatmapLayerRef.current) {
+    //     mapInstanceRef.current.removeLayer(heatmapLayerRef.current);
+    //     heatmapLayerRef.current = null;
+    //   }
+    // };
   }, [disasters, onMarkerClick]);
 
   // Handle measurement mode

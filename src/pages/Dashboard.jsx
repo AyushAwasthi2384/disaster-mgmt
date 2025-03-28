@@ -4,6 +4,7 @@ import WeatherData from "./WeatherData.jsx";
 import { useNavigate } from "react-router-dom";
 import { Search, AlertTriangle } from "lucide-react";
 import MapComponent from "../component/MapComponent.jsx";
+import { useDisasterAlerts } from '../ai/useDisasterAlerts.jsx';
 
 const DisasterDashboard = () => {
   const [isPopupVisible, setIsPopupVisible] = useState(false);
@@ -11,6 +12,7 @@ const DisasterDashboard = () => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [resourceType, setResourceType] = useState("");
+  const alerts = useDisasterAlerts();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -130,7 +132,7 @@ const DisasterDashboard = () => {
       <div className="flex-1 flex flex-col w-screen h-screen overflow-auto scrollbar-hide shadow-md">
         <div className="p-4 flex-1">
           <div className="w-full h-[50vh] object-cover rounded-xl hover:scale-101 relative z-0">
-            <MapComponent />
+            <MapComponent disasters={alerts} />
           </div>
         </div>
 
@@ -158,32 +160,7 @@ const DisasterDashboard = () => {
             {/* Disaster Alerts */}
             <div className="bg-[#161E29] rounded-xl hover:drop-shadow-lg p-6">
               <div className="flex flex-col space-y-4">
-                {[
-                  {
-                    title: "Severe Flooding in Jankipuram",
-                    color: "bg-red-500",
-                    areas: ["Gandhi Maidan", "Amausi Ganj", "Sarvari Nagar"],
-                    needs: "Food , clean water , medical aid",
-                  },
-                  {
-                    title: "Forest Fire Spreading in Uttarakhand",
-                    color: "bg-red-500",
-                    areas: ["Nainital", "Almora", "Ranikhet"],
-                    needs: "More firefighting units , emergency shelters",
-                  },
-                  {
-                    title: 'Cyclone "Varun" Hits Odisha Coast',
-                    color: "bg-orange-500",
-                    areas: ["Puri", "Bhubaneswar", "Cuttack"],
-                    needs: "Food , clean water , medical aid",
-                  },
-                  {
-                    title: "Yamuna River Crosses Danger Mark in Delhi",
-                    color: "bg-orange-500",
-                    areas: ["East Delhi", "Yamuna Bank", "Shahdara"],
-                    needs: "Evacuation assistance , emergency shelters",
-                  },
-                ].map((alert, index) => (
+                {alerts.map((alert, index) => (
                   <div key={index} className="bg-[#1D2939] mb-5 p-4 rounded-xl">
                     <div className="flex flex-col w-full items-start">
                       <div className="flex w-full items-center">
@@ -195,7 +172,7 @@ const DisasterDashboard = () => {
                         <div className="flex w-full justify-between items-center">
                           <h3 className="font-semibold">{alert.title}</h3>
                           <p className="text-xs text-gray-400">
-                            Date: 10 March 2025
+                            Date: {new Date().toLocaleDateString()}
                           </p>
                         </div>
                       </div>
@@ -220,12 +197,12 @@ const DisasterDashboard = () => {
                           <p className="text-xs">{alert.needs}</p>
                         </div>
                         <div className="flex gap-3">
-                          <button className="px-3 py-1 bg-gray-600 rounded-lg text-sm">
+                          <button className="cursor-pointer px-3 py-1 hover:bg-gray-500 bg-gray-600 rounded-lg text-sm">
                             More Info
                           </button>
                           <button
                             onClick={handleResource}
-                            className="px-3 py-1 bg-blue-600 rounded-lg text-sm"
+                            className="cursor-pointer hover:bg-blue-700 px-3 py-1 bg-blue-600 rounded-lg text-sm"
                           >
                             Resource
                           </button>
